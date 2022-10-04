@@ -19,10 +19,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "./",
-    // "paths": {
-    //     "styles/*": ["styles/*"],
-    //     "lib/*": ["lib/*"],
-    // }
+    "paths": {
+        "@/*": ["./src/*"],
+        "@styles/*": ["styles/*"],
+        "@lib/*": ["lib/*"],
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types/**/*.d.ts"],
   "exclude": [

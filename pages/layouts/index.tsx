@@ -1,6 +1,6 @@
 import { ReactElement} from 'react'
 
-type LayoutProps = Required<{
+ type LayoutProps = Required<{
   readonly children: ReactElement
 }>
 
