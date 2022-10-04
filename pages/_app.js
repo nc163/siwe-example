@@ -1,6 +1,6 @@
 import 'styles/globals.css'
 import { WagmiConfig } from 'wagmi'
-import { wagmiClient } from "lib/wagmiClient"
+import { wagmiClient } from "@lib/wagmiClient"
 
 function MyDApp({ Component, pageProps }) {
 return (
