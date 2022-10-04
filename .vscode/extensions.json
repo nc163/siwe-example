@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "pranaygp.vscode-css-peek",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "mosapride.zenkaku"
+  ]
+}

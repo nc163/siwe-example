@@ -1,4 +1,16 @@
 {
+  "files.watcherExclude": {
+    "**/.next": true,
+    "**/.vscode": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/.next": true,
+    "**/.vscode": true,
+    "**/node_modules": true,
+    "out": true
+  },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
