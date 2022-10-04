@@ -1,10 +1,9 @@
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { NextApiRequest, NextApiResponse } from 'next'
-import {ironOptions} from "./ironOptions"
+import { ironOptions } from './ironOptions'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-
-  console.log("⭐️ | logout.ts")
+  console.log('⭐️ | logout.ts')
 
   const { method } = req
   switch (method) {
@@ -16,6 +15,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.setHeader('Allow', ['GET'])
       res.status(405).end(`Method ${method} Not Allowed`)
   }
-};
+}
 
 export default withIronSessionApiRoute(handler, ironOptions)

@@ -20,7 +20,7 @@ export function useSIWE() {
         const json = await res.json()
         setState((x) => ({ ...x, address: json.address }))
       } catch (_error) {
-        console.log("me error")
+        console.log('me error')
       }
     }
     // 1. page loads
@@ -31,21 +31,20 @@ export function useSIWE() {
     return () => window.removeEventListener('focus', handler)
   }, [])
 
-  const createSiweMessage = async (address, statement) =>  {
-    const res = await fetch(`/api/nonce`);
+  const createSiweMessage = async (address, statement) => {
+    const res = await fetch(`/api/nonce`)
     const chainId = activeChain?.id
     const message = new SiweMessage({
-        domain: window.location.host,
-        address,
-        statement,
-        uri: origin,
-        version: '1',
-        chainId,
-        nonce: await res.text()
-    });
-    return message.prepareMessage();
-}
-
+      domain: window.location.host,
+      address,
+      statement,
+      uri: origin,
+      version: '1',
+      chainId,
+      nonce: await res.text(),
+    })
+    return message.prepareMessage()
+  }
 
   const fetchNonce = async () => {
     try {
@@ -64,10 +63,10 @@ export function useSIWE() {
     fetchNonce()
   }, [])
 
-  
-
-  const signInWithEthereum = async (  onSuccess: (args: { address: string }) => void,
-  onError: (args: { error: Error }) => void) => {
+  const signInWithEthereum = async (
+    onSuccess: (args: { address: string }) => void,
+    onError: (args: { error: Error }) => void,
+  ) => {
     try {
       const chainId = activeChain?.id
       if (!address || !chainId) return
@@ -100,9 +99,9 @@ export function useSIWE() {
       setState((x) => ({ ...x, loading: false }))
       setState((x) => ({ ...x, address }))
       onSuccess({ address })
-      console.log("ok")
+      console.log('ok')
     } catch (error) {
-        console.log("error")
+      console.log('error')
       setState((x) => ({ ...x, loading: false, nonce: undefined }))
       onError({ error: error as Error })
       setState((x) => ({ ...x, error }))
@@ -111,5 +110,4 @@ export function useSIWE() {
   }
 
   return { signInWithEthereum, state }
-
 }

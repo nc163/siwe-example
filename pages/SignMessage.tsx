@@ -2,7 +2,8 @@ import * as React from 'react'
 import { useAccount, useNetwork, useSignMessage } from 'wagmi'
 import { SiweMessage } from 'siwe'
 
-export function SignInButton({  onSuccess,
+export function SignInButton({
+  onSuccess,
   onError,
 }: {
   onSuccess: (args: { address: string }) => void
@@ -72,5 +73,9 @@ export function SignInButton({  onSuccess,
       fetchNonce()
     }
   }
-  return <button disabled={!state.nonce || state.loading} onClick={signIn}>{"Sign-In with Ethereum"}</button>
+  return (
+    <button disabled={!state.nonce || state.loading} onClick={signIn}>
+      {'Sign-In with Ethereum'}
+    </button>
+  )
 }

@@ -3,22 +3,26 @@ import { useSignMessage } from 'wagmi'
 import { SiweMessage } from 'siwe'
 
 export interface UseSiweFrontendProps {
-    domain: string,
-    address: string,
-    uri: string,
-    chainId: number
+  domain: string
+  address: string
+  uri: string
+  chainId: number
 }
 
 export interface SiweState {
-    signin: boolean,
-    loading: boolean
-    nonce?: string
-    address?: string
+  signin: boolean
+  loading: boolean
+  nonce?: string
+  address?: string
 }
 
 export function useSiweFrontend(props: UseSiweFrontendProps) {
   const { signMessageAsync } = useSignMessage()
-  const [siweState, setState] = useState<SiweState>({ signin: false, loading: false, nonce: undefined })
+  const [siweState, setState] = useState<SiweState>({
+    signin: false,
+    loading: false,
+    nonce: undefined,
+  })
 
   useEffect(() => {
     const handler = async () => {
@@ -28,7 +32,6 @@ export function useSiweFrontend(props: UseSiweFrontendProps) {
         setState((x) => ({ ...x, address: json.address }))
       } catch (_error) {
         setState((x) => ({ ...x, signin: false }))
-        
       }
     }
     // 1. page loads
@@ -39,20 +42,19 @@ export function useSiweFrontend(props: UseSiweFrontendProps) {
     return () => window.removeEventListener('focus', handler)
   }, [])
 
-  const createSiweMessage = async (params: UseSiweFrontendProps) =>  {
-    const res = await fetch(`/api/nonce`);
+  const createSiweMessage = async (params: UseSiweFrontendProps) => {
+    const res = await fetch(`/api/nonce`)
     const message = new SiweMessage({
-        domain: params.domain,
-        address: params.address,
-        statement: 'Sign in with Ethereum to the app.',
-        uri: params.uri,
-        version: '1',
-        chainId: params.chainId,
-        nonce: await res.text()
-    });
-    return message.prepareMessage();
-}
-
+      domain: params.domain,
+      address: params.address,
+      statement: 'Sign in with Ethereum to the app.',
+      uri: params.uri,
+      version: '1',
+      chainId: params.chainId,
+      nonce: await res.text(),
+    })
+    return message.prepareMessage()
+  }
 
   const fetchNonce = async () => {
     try {
@@ -71,15 +73,13 @@ export function useSiweFrontend(props: UseSiweFrontendProps) {
     fetchNonce()
   }, [])
 
-  
-
   const signInWithEthereum = async (params: UseSiweFrontendProps) => {
     try {
       setState((x) => ({ ...x, loading: true }))
       // Create SIWE message with pre-fetched nonce and sign with wallet
-      const message = await createSiweMessage(params);
+      const message = await createSiweMessage(params)
 
-      const signature = await signMessageAsync({message: message})
+      const signature = await signMessageAsync({ message: message })
 
       // Verify signature
       const verifyRes = await fetch('/api/verify', {

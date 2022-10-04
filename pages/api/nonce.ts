@@ -1,11 +1,10 @@
 import { withIronSessionApiRoute } from 'iron-session/next'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { generateNonce } from 'siwe'
-import {ironOptions} from "./ironOptions"
+import { ironOptions } from './ironOptions'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-
-  console.log("⭐️ <=| nonce.ts" + req.session.nonce)
+  console.log('⭐️ <=| nonce.ts' + req.session.nonce)
 
   const { method } = req
   switch (method) {
@@ -15,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.setHeader('Content-Type', 'text/plain')
       res.send(req.session.nonce)
 
-      console.log("⭐️ =>| nonce.ts" + req.session.nonce)
+      console.log('⭐️ =>| nonce.ts' + req.session.nonce)
       break
     default:
       res.setHeader('Allow', ['GET'])
