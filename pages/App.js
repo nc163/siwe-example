@@ -1,5 +1,5 @@
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { useState, useEffect } from 'react'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { SignInButton } from './SignMessage'
 import styles from 'styles/Home.module.css'
 

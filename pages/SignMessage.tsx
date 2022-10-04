@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { useAccount, useNetwork, useSignMessage } from 'wagmi'
 import { SiweMessage } from 'siwe'
+import { useAccount, useNetwork, useSignMessage } from 'wagmi'
 
 export function SignInButton({
   onSuccess,

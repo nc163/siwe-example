@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-
-import { useAccount, useNetwork, useSignMessage } from 'wagmi'
 import { SiweMessage } from 'siwe'
+import { useAccount, useNetwork, useSignMessage } from 'wagmi'
 
 export function useSIWE() {
   const { isConnected, address } = useAccount()

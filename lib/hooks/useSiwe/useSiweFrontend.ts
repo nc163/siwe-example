@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useSignMessage } from 'wagmi'
 import { SiweMessage } from 'siwe'
+import { useSignMessage } from 'wagmi'
 
 export interface UseSiweFrontendProps {
   domain: string

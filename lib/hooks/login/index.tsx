@@ -1,7 +1,5 @@
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { useState, useEffect } from 'react'
-// import styles from '../styles/Home.module.css'
-// import { SignInButton } from './SignMessage'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 export default function Login() {
   const { address, connector, isConnected } = useAccount()
