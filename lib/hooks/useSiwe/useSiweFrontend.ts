@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { SiweMessage } from 'siwe'
-import { useSignMessage } from 'wagmi'
+import { useSignMessage, useAccount } from 'wagmi'
 
 export interface UseSiweFrontendProps {
   domain: string
@@ -16,7 +16,9 @@ export interface SiweState {
   address?: string
 }
 
-export function useSiweFrontend(props: UseSiweFrontendProps) {
+export function useSiweFrontend() {
+  const { isConnected } = useAccount()
+
   const { signMessageAsync } = useSignMessage()
   const [siweState, setState] = useState<SiweState>({
     signin: false,
@@ -25,6 +27,8 @@ export function useSiweFrontend(props: UseSiweFrontendProps) {
   })
 
   useEffect(() => {
+    if (!isConnected) return
+
     const handler = async () => {
       try {
         const res = await fetch('/api/me')
@@ -40,7 +44,7 @@ export function useSiweFrontend(props: UseSiweFrontendProps) {
     // 2. window is focused (in case user logs out of another window)
     window.addEventListener('focus', handler)
     return () => window.removeEventListener('focus', handler)
-  }, [])
+  }, [isConnected])
 
   const createSiweMessage = async (params: UseSiweFrontendProps) => {
     const res = await fetch(`/api/nonce`)
@@ -57,6 +61,8 @@ export function useSiweFrontend(props: UseSiweFrontendProps) {
   }
 
   const fetchNonce = async () => {
+    if (!isConnected) return
+
     try {
       const nonceRes = await fetch('/api/nonce')
       const nonce = await nonceRes.text()
@@ -70,10 +76,14 @@ export function useSiweFrontend(props: UseSiweFrontendProps) {
   // to ensure deep linking works for WalletConnect
   // users on iOS when signing the SIWE message
   useEffect(() => {
+    if (!isConnected) return
+
     fetchNonce()
-  }, [])
+  }, [isConnected])
 
   const signInWithEthereum = async (params: UseSiweFrontendProps) => {
+    if (!isConnected) return
+
     try {
       setState((x) => ({ ...x, loading: true }))
       // Create SIWE message with pre-fetched nonce and sign with wallet

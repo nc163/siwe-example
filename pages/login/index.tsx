@@ -20,13 +20,17 @@ export default function SignIn() {
   const { disconnect } = useDisconnect()
   const { signInWithEthereum, siweState } = useSiweFrontend()
 
-  useEffect(() => {
-    if (!siweState.signin) return
-  }, [siweState])
+  //  //  ログインステータスが変わった時に何かする？
+  //   useEffect(() => {
+  //     if (!siweState.signin) return
+  //   }, [siweState])
 
-  const connnectWallet = (connector: Partial<ConnectArgs> | undefined) => {
+  //
+  const connnectWallet = (connector: Partial<ConnectArgs>) => {
     connect(connector)
   }
+
+  //
   const siwe = () => {
     if (!address || !activeChain?.id) return
 
