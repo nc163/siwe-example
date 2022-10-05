@@ -15,7 +15,7 @@ export interface SiweState {
   nonce?: string
   address?: string
 }
-
+  
 export function useSiweFrontend() {
   const { isConnected } = useAccount()
 

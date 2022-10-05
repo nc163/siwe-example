@@ -1,8 +1,3 @@
 {
-  "recommendations": [
-    "pranaygp.vscode-css-peek",
-    "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode",
-    "mosapride.zenkaku"
-  ]
+  "recommendations": ["pranaygp.vscode-css-peek", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "mosapride.zenkaku", "Prisma.prisma", "alexcvzz.vscode-sqlite"]
 }
