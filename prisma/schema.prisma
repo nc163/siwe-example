@@ -10,6 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  output = "./erd.png"
+  // It can be useful to show them when working with RDBMS. To show them use includeRelationFromFields = true
+  includeRelationFromFields = true
+}
+
 // model
 
 model Account {

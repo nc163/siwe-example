@@ -39,5 +39,6 @@ next-env.d.ts
 # prisma
 /prisma/dev.db
 /prisma/migrations/
+/prisma/debug/
 
 
