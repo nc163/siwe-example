@@ -27,8 +27,6 @@ export default function App() {
     return () => window.removeEventListener('focus', handler)
   }, [])
 
-  console.log(isConne)
-
   if (isConnected) {
     return (
       <div>
