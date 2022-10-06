@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
-import { createContext, useContext, useEffect, useState, ReactElement, useReducer } from 'react'
-import { useAccount, useConnect, useDisconnect, useNetwork } from 'wagmi'
+import { createContext, useContext, useEffect, ReactElement, useReducer } from 'react'
+import { useAccount } from 'wagmi'
 
 export interface TSessionState {
   signin: boolean

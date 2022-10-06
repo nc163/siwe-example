@@ -6,8 +6,6 @@ import prisma from '@lib/prisma'
 import withSession from '@lib/session'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log('⭐️ <=| nonce.ts' + req.session.nonce)
-
   const { method } = req
   switch (method) {
     case 'POST':
