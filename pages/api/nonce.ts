@@ -14,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.setHeader('Content-Type', 'text/plain')
       res.send(req.session.nonce)
 
-      console.log('⭐️ =>| nonce.ts' + req.session.nonce)
+      console.log('⭐️ =>| nonce.ts ' + JSON.stringify(req.session))
       break
     default:
       res.setHeader('Allow', ['GET'])

@@ -7,6 +7,7 @@ export interface UseSiweFrontendProps {
   address: string
   uri: string
   chainId: number
+  resources?: string[]
 }
 
 export interface SiweState {
@@ -15,8 +16,8 @@ export interface SiweState {
   nonce?: string
   address?: string
 }
-  
-export function useSiweFrontend() {
+
+export function useSiweVerify() {
   const { isConnected } = useAccount()
 
   const { signMessageAsync } = useSignMessage()
@@ -25,26 +26,6 @@ export function useSiweFrontend() {
     loading: false,
     nonce: undefined,
   })
-
-  useEffect(() => {
-    if (!isConnected) return
-
-    const handler = async () => {
-      try {
-        const res = await fetch('/api/me')
-        const json = await res.json()
-        setState((x) => ({ ...x, address: json.address }))
-      } catch (_error) {
-        setState((x) => ({ ...x, signin: false }))
-      }
-    }
-    // 1. page loads
-    handler()
-
-    // 2. window is focused (in case user logs out of another window)
-    window.addEventListener('focus', handler)
-    return () => window.removeEventListener('focus', handler)
-  }, [isConnected])
 
   const createSiweMessage = async (params: UseSiweFrontendProps) => {
     const res = await fetch(`/api/nonce`)
@@ -57,6 +38,7 @@ export function useSiweFrontend() {
       chainId: params.chainId,
       nonce: await res.text(),
     })
+
     return message.prepareMessage()
   }
 

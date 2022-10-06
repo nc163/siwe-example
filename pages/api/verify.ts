@@ -47,6 +47,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           create: { ethAddr: address, nance: siweMessage.nonce },
         })
 
+        req.session.siwe = fields
+        await req.session.save()
+
         sendValue = true
       } catch (e) {
         console.error(e)

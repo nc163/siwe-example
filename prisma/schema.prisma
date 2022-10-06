@@ -23,7 +23,7 @@ model Account {
   id        Int      @id @default(autoincrement())
   user      User?
   ethAddr   String   @unique
-  nance     String   
+  nance     String
 }
 
 model User {

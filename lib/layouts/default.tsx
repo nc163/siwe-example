@@ -6,12 +6,13 @@ import Container from '@mui/material/Container'
 import CssBaseline from '@mui/material/CssBaseline'
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { useSession } from '@lib/Session'
+import { useRouter } from 'next/router'
+import { ReactElement } from 'react'
+import { useAccount, useConnect, useDisconnect, useNetwork } from 'wagmi'
 
 const theme = createTheme()
 
-export default function App() {
-  const { disconnect } = useSession()
+export default function DefaultLayout({ children }: { children: ReactElement }): ReactElement {
   return (
     <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='xs'>
@@ -24,12 +25,7 @@ export default function App() {
             alignItems: 'center',
           }}
         >
-          <Typography component='h1' variant='h5'>
-            ようこそ
-          </Typography>
-          <Button fullWidth variant='contained' sx={{ mt: 1, mb: 1 }} onClick={() => disconnect()}>
-            ログアウト
-          </Button>
+          {children}
         </Box>
       </Container>
     </ThemeProvider>
