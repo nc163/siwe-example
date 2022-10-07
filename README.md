@@ -9,16 +9,13 @@ eip6361
 # install
 ```bash
 npm i
+npm prisma migrate dev --name init
 ```
 
 # run
 ``` bash
 npm run dev
 ```
-
-# db:migrate
-
-`npx prisma migrate dev --name init`
 
 # db:erd
 
