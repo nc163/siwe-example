@@ -9,7 +9,7 @@ eip6361
 # install
 ```bash
 npm i
-npm prisma migrate dev --name init
+npm run db:migrate
 ```
 
 # run
