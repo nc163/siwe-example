@@ -6,7 +6,7 @@ https://8thlight.com/blog/emmanuel-byrd/2022/06/09/sign-in-with-ethereum.html
 
 eip6361
 
-# db：migrate
+# db:migrate
 
 `npx prisma migrate dev --name init`
 
