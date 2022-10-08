@@ -2,7 +2,6 @@ import { withIronSessionApiRoute } from 'iron-session/next'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { generateNonce, SiweMessage } from 'siwe'
 import { ironOptions } from './ironOptions'
-import prisma from '@lib/prisma'
 import withSession from '@lib/session'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -38,12 +37,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         // TODO: ENS-Name-Address to Wallet-Address
         // https://docs.ens.domains/dapp-developer-guide/working-with-ens
-
-        const account = await prisma.account.upsert({
-          where: { ethAddr: address },
-          update: { ethAddr: address, nance: siweMessage.nonce },
-          create: { ethAddr: address, nance: siweMessage.nonce },
-        })
 
         req.session.siwe = fields
         await req.session.save()
