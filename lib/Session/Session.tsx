@@ -1,25 +1,17 @@
 import { useRouter } from 'next/router'
-import { createContext, useContext, useEffect, ReactElement, useReducer } from 'react'
+import { createContext, useEffect, ReactElement, useReducer } from 'react'
 import { useAccount } from 'wagmi'
 
-export interface TSessionState {
-  signin: boolean
-  loading: boolean
-  address?: string
-}
-
-const SessionContext = createContext({
+export const SessionContext = createContext<SessionState>({
   state: {
     signin: false,
     loading: true,
     address: null,
   },
-  dispatch: (TAction) => {},
+  dispatch: (SessionAction) => {},
 })
 
-type TAction = { type: 'connect'; update: TSessionState } | { type: 'disconnect'; update: TSessionState }
-
-const sessionReducer = (state: TSessionState, action: TAction): TSessionState => {
+const sessionReducer = (state: SessionStateType, action: SessionAction): SessionStateType => {
   switch (action.type) {
     case 'connect': {
       return { ...state, ...action.update }
@@ -41,11 +33,6 @@ export const Session = ({ children }: { children: ReactElement }): ReactElement 
     loading: true,
   })
 
-  //   const [state, setState] = useState<TSessionState>({
-  //     signin: false,
-  //     loading: true,
-  //   })
-
   useEffect(() => {
     if (!isConnected) return
 
@@ -54,11 +41,9 @@ export const Session = ({ children }: { children: ReactElement }): ReactElement 
         const res = await fetch('/api/me')
         const json = await res.json()
         dispatch({ type: 'connect', update: { address: json.address, loading: false, signin: Boolean(json.address) } })
-        // setState((x) => ({ ...x, address: json.address, signin: Boolean(json.address) }))
-      } catch (_error) {
-        console.log(_error)
+      } catch (e) {
+        console.error(e)
         dispatch({ type: 'disconnect', update: { address: null, loading: false, signin: false } })
-        // setState((x) => ({ ...x, signin: false }))
       }
     }
     // 1. page loads
@@ -82,28 +67,4 @@ export const Session = ({ children }: { children: ReactElement }): ReactElement 
   }, [isConnected, state])
 
   return <SessionContext.Provider value={{ state, dispatch }}>{children}</SessionContext.Provider>
-}
-
-export const useSession = () => {
-  const { dispatch } = useContext(SessionContext)
-
-  const confirmation = async () => {
-    try {
-      const res = await fetch('/api/me')
-      const json = await res.json()
-      dispatch({ type: 'connect', update: { address: json.address, loading: false, signin: Boolean(json.address) } })
-      // setState((x) => ({ ...x, address: json.address, signin: Boolean(json.address) }))
-    } catch (_error) {
-      console.log(_error)
-      dispatch({ type: 'disconnect', update: { address: null, loading: false, signin: false } })
-      // setState((x) => ({ ...x, signin: false }))
-    }
-  }
-
-  const disconnect = async () => {
-    await fetch('/api/logout')
-    dispatch({ type: 'disconnect', update: { address: null, loading: false, signin: false } })
-  }
-
-  return { confirmation, disconnect }
 }

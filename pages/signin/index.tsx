@@ -22,7 +22,7 @@ export default function SignIn() {
       <Box sx={{ mt: 1 }}>
         {isConnected ? <SignInWithEthereum /> : <WalletConnect />}
         {isConnected && (
-          <Button fullWidth variant='contained' sx={{ mt: 1, mb: 1 }} onClick={disconnect}>
+          <Button fullWidth variant='contained' sx={{ mt: 1, mb: 1 }} onClick={() => disconnect()}>
             Wallet Disconnect
           </Button>
         )}
