@@ -10,8 +10,8 @@
 - [関連記事](#関連記事)
 
 ## 概要
-- パスワード認証を置き換えるウォレットを使ったサインイン方法、SIWEの概要
-- EIP4361でまとめられている
+- パスワード認証を置き換えるウォレットを使ったサインイン方法、Sign in with Ethereum (SIWE)
+- 仕様はEIP4361で検討されている
 
 
 ## 結論
@@ -60,3 +60,6 @@ https://docs.login.xyz/
 https://8thlight.com/blog/emmanuel-byrd/2022/06/09/sign-in-with-ethereum.html
 
 [Sign-In with Ethereum Example - wagmi](https://wagmi.sh/examples/sign-in-with-ethereum)
+
+https://eips.ethereum.org/EIPS/eip-4361
+
